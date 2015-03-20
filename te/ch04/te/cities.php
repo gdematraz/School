@@ -13,7 +13,6 @@ const DB_PASSWORD = 'cpnv1234';
 const DB_NAME     = 'world';
 
 $dbh = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
-
 if ($dbh->connect_errno) {
     //affichage de l'erreur en cas de problème
     $error_msg = sprintf('Problème de connexion : (%d) %s',
@@ -24,43 +23,44 @@ if ($dbh->connect_errno) {
         //le nombre de lignes
         $number_of_records = $result->num_rows;
 
-        $result->close();
-
-    } else {
-        while ($city = $result->fetch_assoc()) {
-                echo"{}{}";
-        }
-        $error_msg = sprintf('Problème lors de la requête : (%d) %s',
-                             $dbh->errno, $dbh->error);
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="utf-8">
     <title>TE informatique</title>
+
   </head>
     <body>
         <h3>TE PHP-MYSQL informatique au CPNV</h3>
-        <?php
+<?php
             echo "Il y a " . $number_of_records . " villes";
             echo "<br />";
-        ?>
-        <table>
+?>
+        <table border="1px">
             <thead>
                 <tr>
-                    <td>Salut</td>
-                    <td>C'est</td>
-                    <td>Le tableau</td>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>District</td>
+                    <td>Code Postal</td>
+                    <td>Édition</td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>une</td>
-                    <td>Ville</td>
-                    <td>ici</td>
-                </tr>
+<?php
+                    while ($city = $result->fetch_assoc()) {
+                        echo "<tr>" . 
+                        "<td>{$city['ID']}</td>" . 
+                        "<td>{$city['Name']}</td>" . 
+                        "<td>{$city['District']}</td>" . 
+                        "<td>{$city['CountryCode']}</td>" . 
+                        "<td><a href=\"edit.php?ID={$city['ID']}&Name={$city['Name']}&District={$city['District']}&CC={$city['CountryCode']}\">Editer</a></td>" . 
+                        "</tr>";
+                    }
+                }
+            }
+?>
             </tbody>
         <?php
             $dbh->close();
