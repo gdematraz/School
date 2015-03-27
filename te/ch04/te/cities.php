@@ -19,7 +19,7 @@ if ($dbh->connect_errno) {
                          $dbh->connect_errno, $dbh->connect_error);
 } else {
 
-    if ($result = $dbh->query('select ID, Name, CountryCode, District from City where CountryCOde = \'CHE\' order by Name')) {
+    if ($result = $dbh->query('select ID, Name, CountryCode, District, Population from City where CountryCOde = \'CHE\' order by Name')) {
         //le nombre de lignes
         $number_of_records = $result->num_rows;
 
@@ -27,6 +27,8 @@ if ($dbh->connect_errno) {
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <link href="Style/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Style/css/bootstrap-theme.css" rel="stylesheet">
     <meta charset="utf-8">
     <title>TE informatique</title>
 
@@ -44,6 +46,7 @@ if ($dbh->connect_errno) {
                     <td>Nom</td>
                     <td>District</td>
                     <td>Code Postal</td>
+                    <td>Population</td>
                     <td>Édition</td>
                 </tr>
             </thead>
@@ -55,7 +58,8 @@ if ($dbh->connect_errno) {
                         "<td>{$city['Name']}</td>" . 
                         "<td>{$city['District']}</td>" . 
                         "<td>{$city['CountryCode']}</td>" . 
-                        "<td><a href=\"edit.php?ID={$city['ID']}&Name={$city['Name']}&District={$city['District']}&CC={$city['CountryCode']}\">Editer</a></td>" . 
+                        "<td>{$city['Population']}</td>" . 
+                        "<td><a href=\"edit.php?ID={$city['ID']}&Name={$city['Name']}&District={$city['District']}&CC={$city['CountryCode']}&Population={$city['Population']}\">Editer</a></td>" . 
                         "</tr>";
                     }
                 }
