@@ -12,7 +12,7 @@ const DB_USER     = 'cpnv';
 const DB_PASSWORD = 'cpnv1234';
 const DB_NAME     = 'world';
 
-$dbh = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
+$dbh = @ new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
 if ($dbh->connect_errno) {
     //affichage de l'erreur en cas de problème
     $error_msg = sprintf('Problème de connexion : (%d) %s',

@@ -15,7 +15,7 @@ const DB_USER     = 'cpnv';
 const DB_PASSWORD = 'cpnv1234';
 const DB_NAME     = 'world';
 
-$dbh = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
+$dbh = @ new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
 
 if ($dbh->connect_errno) {
     //affichage de l'erreur en cas de problème
@@ -23,7 +23,7 @@ if ($dbh->connect_errno) {
                          $dbh->connect_errno, $dbh->connect_error);
 }
 
-$sql = "UPDATE City SET Population=$Population Where ID=$ID";
+$sql = "UPDATE City SET Population=$Population Where ID='$ID'";
 
 ?>
 <!DOCTYPE html>
